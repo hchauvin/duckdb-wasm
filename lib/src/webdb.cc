@@ -107,7 +107,7 @@ arrow::Result<std::shared_ptr<arrow::Buffer>> WebDB::Connection::MaterializeQuer
     unordered_map<idx_t, const shared_ptr<ArrowTypeExtensionData>> extension_type_cast;
     options.arrow_offset_size = ArrowOffsetSize::REGULAR;
     options.arrow_lossless_conversion =
-        BooleanValue::Get(ArrowLosslessConversionSetting::GetSetting(connection_.context));
+        BooleanValue::Get(ArrowLosslessConversionSetting::GetSetting(*connection_.context));
     ArrowConverter::ToArrowSchema(&raw_schema, result->types, result->names, options);
     ARROW_ASSIGN_OR_RAISE(auto schema, arrow::ImportSchema(&raw_schema));
 
